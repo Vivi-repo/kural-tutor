@@ -1,0 +1,1686 @@
+{
+ "meta": {
+  "generatedAt": "2026-10-07T23:35:08.592Z",
+  "seed": 99,
+  "perArchetype": 40,
+  "learners": 440,
+  "tasks": 8,
+  "testItemsPerConcept": 2,
+  "runtimeSec": 8.7,
+  "archetypes": {
+   "fluent": "Fluent",
+   "slowFluent": "Slow but fluent",
+   "silentKnower": "Knows it, freezes",
+   "lexicalGap": "Missing English words",
+   "transferHeavy": "Tamil-structure transfer",
+   "beginner": "Genuine beginner",
+   "anxious": "Anxious / overloaded",
+   "misreader": "Misreads questions",
+   "careless": "Fast and careless",
+   "erratic": "Erratic / inconsistent",
+   "mixed": "Mixed per concept"
+  },
+  "conditions": {
+   "static": {
+    "label": "Static tutor",
+    "desc": "One English attempt; wrong → show model answer."
+   },
+   "staticRetry": {
+    "label": "Static + retries",
+    "desc": "Up to 3 \"try again\" attempts, then the model answer. Time-matched baseline."
+   },
+   "adaptive": {
+    "label": "Adaptive (full)",
+    "desc": "Load + diagnosis + all strategies."
+   },
+   "noHold": {
+    "label": "− hysteresis",
+    "desc": "Switches mode on the first calm mistake."
+   },
+   "noProbe": {
+    "label": "− recognition probe",
+    "desc": "Never tests knowledge with multiple choice."
+   },
+   "englishOnly": {
+    "label": "− Tamil channels",
+    "desc": "No Tamil clarification, code-switching, word bridge or bilingual contrast."
+   },
+   "ladder": {
+    "label": "Ladder (no diagnosis)",
+    "desc": "Ignores the diagnosis: every failure climbs one rung."
+   }
+  },
+  "bottlenecks": {
+   "KNOWLEDGE": "Knowledge gap",
+   "RETRIEVAL": "Retrieval gap",
+   "EXPRESSION": "Expression gap",
+   "L1_TRANSFER": "Tamil-structure transfer",
+   "OVERLOAD": "Cognitive overload",
+   "MISUNDERSTANDING": "Misunderstood question"
+  },
+  "effects": {
+   "teachK": {
+    "explicit": 0.55,
+    "bilingual": 0.3,
+    "keyword": 0.15,
+    "hold": 0.1,
+    "reveal": 0.15
+   },
+   "transferMult": {
+    "explicit": 0.6,
+    "bilingual": 0.45,
+    "hold": 0.85,
+    "reveal": 0.85,
+    "retry": 0.95
+   },
+   "closeLexical": {
+    "bridge": 0.65,
+    "reveal": 0.2,
+    "explicit": 0.25
+   },
+   "retrieval": {
+    "recognition": 0.02,
+    "guided": 0.02,
+    "keyword": 0.04,
+    "explicit": 0.05,
+    "bilingual": 0.03,
+    "successEnglish": 0.06,
+    "successAfterStruggle": 0.06,
+    "successSupported": 0.03
+   },
+   "comprehension": {
+    "clarify": 0.15
+   }
+  },
+  "bankProblems": [],
+  "tuning": {
+   "note": "One diagnosis change was made after inspecting the confusion matrix on a separate tuning seed (7): history-based retrieval evidence is halved when the answer shows a specific error pattern. All numbers on this page come from a fresh held-out seed (99).",
+   "tuningSeed": 7,
+   "diagAccBefore": 0.501,
+   "diagAccAfter": 0.54,
+   "transferCorrectBefore": 474,
+   "transferCorrectAfter": 602
+  }
+ },
+ "byCond": {
+  "static": {
+   "label": "Static tutor",
+   "desc": "One English attempt; wrong → show model answer.",
+   "n": 440,
+   "pre": {
+    "mean": 0.248,
+    "ci": 0.022,
+    "n": 440
+   },
+   "post": {
+    "mean": 0.263,
+    "ci": 0.022,
+    "n": 440
+   },
+   "gain": {
+    "mean": 0.015,
+    "ci": 0.013,
+    "n": 440
+   },
+   "diffVsStatic": {
+    "mean": 0,
+    "ci": 0,
+    "n": 440,
+    "pctImproved": 0,
+    "pctWorse": 0,
+    "d": null
+   },
+   "firstAttempt": 0.253,
+   "independent": 0.223,
+   "turnsPerTask": 1,
+   "gainPer10Turns": 0.018,
+   "hintsPerTask": 0.095,
+   "skipRate": 0.024,
+   "gapMislabel": 0.721,
+   "gapRecall": 0.957,
+   "gapPrecision": 0.293
+  },
+  "staticRetry": {
+   "label": "Static + retries",
+   "desc": "Up to 3 \"try again\" attempts, then the model answer. Time-matched baseline.",
+   "n": 440,
+   "pre": {
+    "mean": 0.248,
+    "ci": 0.022,
+    "n": 440
+   },
+   "post": {
+    "mean": 0.278,
+    "ci": 0.023,
+    "n": 440
+   },
+   "gain": {
+    "mean": 0.03,
+    "ci": 0.013,
+    "n": 440
+   },
+   "diffVsStatic": {
+    "mean": 0.015,
+    "ci": 0.008,
+    "n": 440,
+    "pctImproved": 0.298,
+    "pctWorse": 0.186,
+    "d": 0.17
+   },
+   "firstAttempt": 0.262,
+   "independent": 0.388,
+   "turnsPerTask": 2.145,
+   "gainPer10Turns": 0.017,
+   "hintsPerTask": 0.171,
+   "skipRate": 0.047,
+   "gapMislabel": 0.709,
+   "gapRecall": 0.955,
+   "gapPrecision": 0.296
+  },
+  "adaptive": {
+   "label": "Adaptive (full)",
+   "desc": "Load + diagnosis + all strategies.",
+   "n": 440,
+   "pre": {
+    "mean": 0.248,
+    "ci": 0.022,
+    "n": 440
+   },
+   "post": {
+    "mean": 0.4,
+    "ci": 0.021,
+    "n": 440
+   },
+   "gain": {
+    "mean": 0.152,
+    "ci": 0.016,
+    "n": 440
+   },
+   "diffVsStatic": {
+    "mean": 0.138,
+    "ci": 0.013,
+    "n": 440,
+    "pctImproved": 0.748,
+    "pctWorse": 0.064,
+    "d": 0.993
+   },
+   "firstAttempt": 0.237,
+   "independent": 0.538,
+   "turnsPerTask": 4.789,
+   "gainPer10Turns": 0.04,
+   "hintsPerTask": 0.272,
+   "skipRate": 0.099,
+   "gapMislabel": 0.128,
+   "gapRecall": 0.708,
+   "gapPrecision": 0.634,
+   "diagAcc": 0.545,
+   "diagAccAll": 0.435,
+   "uncertainRate": 0.202,
+   "loadAuc": 0.948,
+   "loadStruggle": 0.455,
+   "loadCalm": 0.166,
+   "falseAdapt": 0,
+   "falseAdaptSlow": 0,
+   "oscillation": 0.452,
+   "hiddenRecovered": 0.223,
+   "rho": 0.658,
+   "recoveryRate": 0.418
+  },
+  "noHold": {
+   "label": "− hysteresis",
+   "desc": "Switches mode on the first calm mistake.",
+   "n": 440,
+   "pre": {
+    "mean": 0.248,
+    "ci": 0.022,
+    "n": 440
+   },
+   "post": {
+    "mean": 0.409,
+    "ci": 0.021,
+    "n": 440
+   },
+   "gain": {
+    "mean": 0.161,
+    "ci": 0.016,
+    "n": 440
+   },
+   "diffVsStatic": {
+    "mean": 0.146,
+    "ci": 0.014,
+    "n": 440,
+    "pctImproved": 0.75,
+    "pctWorse": 0.061,
+    "d": 1.003
+   },
+   "firstAttempt": 0.232,
+   "independent": 0.508,
+   "turnsPerTask": 4.931,
+   "gainPer10Turns": 0.041,
+   "hintsPerTask": 0.254,
+   "skipRate": 0.099,
+   "gapMislabel": 0.126,
+   "gapRecall": 0.738,
+   "gapPrecision": 0.647,
+   "diagAcc": 0.512,
+   "diagAccAll": 0.424,
+   "uncertainRate": 0.172,
+   "loadAuc": 0.955,
+   "loadStruggle": 0.459,
+   "loadCalm": 0.163,
+   "falseAdapt": 0,
+   "falseAdaptSlow": 0,
+   "oscillation": 0.487,
+   "hiddenRecovered": 0.203,
+   "rho": 0.668,
+   "recoveryRate": 0.381
+  },
+  "noProbe": {
+   "label": "− recognition probe",
+   "desc": "Never tests knowledge with multiple choice.",
+   "n": 440,
+   "pre": {
+    "mean": 0.248,
+    "ci": 0.022,
+    "n": 440
+   },
+   "post": {
+    "mean": 0.416,
+    "ci": 0.021,
+    "n": 440
+   },
+   "gain": {
+    "mean": 0.168,
+    "ci": 0.016,
+    "n": 440
+   },
+   "diffVsStatic": {
+    "mean": 0.154,
+    "ci": 0.014,
+    "n": 440,
+    "pctImproved": 0.764,
+    "pctWorse": 0.068,
+    "d": 1.041
+   },
+   "firstAttempt": 0.229,
+   "independent": 0.586,
+   "turnsPerTask": 4.519,
+   "gainPer10Turns": 0.047,
+   "hintsPerTask": 0.254,
+   "skipRate": 0.1,
+   "gapMislabel": 0.1,
+   "gapRecall": 0.351,
+   "gapPrecision": 0.524,
+   "diagAcc": 0.692,
+   "diagAccAll": 0.465,
+   "uncertainRate": 0.329,
+   "loadAuc": 0.951,
+   "loadStruggle": 0.464,
+   "loadCalm": 0.16,
+   "falseAdapt": 0,
+   "falseAdaptSlow": 0,
+   "oscillation": 0.314,
+   "hiddenRecovered": 0.311,
+   "rho": 0.675,
+   "recoveryRate": 0.49
+  },
+  "englishOnly": {
+   "label": "− Tamil channels",
+   "desc": "No Tamil clarification, code-switching, word bridge or bilingual contrast.",
+   "n": 440,
+   "pre": {
+    "mean": 0.248,
+    "ci": 0.022,
+    "n": 440
+   },
+   "post": {
+    "mean": 0.395,
+    "ci": 0.021,
+    "n": 440
+   },
+   "gain": {
+    "mean": 0.147,
+    "ci": 0.016,
+    "n": 440
+   },
+   "diffVsStatic": {
+    "mean": 0.132,
+    "ci": 0.013,
+    "n": 440,
+    "pctImproved": 0.732,
+    "pctWorse": 0.068,
+    "d": 0.954
+   },
+   "firstAttempt": 0.227,
+   "independent": 0.494,
+   "turnsPerTask": 4.991,
+   "gainPer10Turns": 0.037,
+   "hintsPerTask": 0.288,
+   "skipRate": 0.098,
+   "gapMislabel": 0.132,
+   "gapRecall": 0.703,
+   "gapPrecision": 0.624,
+   "diagAcc": 0.59,
+   "diagAccAll": 0.482,
+   "uncertainRate": 0.182,
+   "loadAuc": 0.952,
+   "loadStruggle": 0.464,
+   "loadCalm": 0.169,
+   "falseAdapt": 0,
+   "falseAdaptSlow": 0,
+   "oscillation": 0.544,
+   "hiddenRecovered": 0.196,
+   "rho": 0.666,
+   "recoveryRate": 0.365
+  },
+  "ladder": {
+   "label": "Ladder (no diagnosis)",
+   "desc": "Ignores the diagnosis: every failure climbs one rung.",
+   "n": 440,
+   "pre": {
+    "mean": 0.248,
+    "ci": 0.022,
+    "n": 440
+   },
+   "post": {
+    "mean": 0.338,
+    "ci": 0.022,
+    "n": 440
+   },
+   "gain": {
+    "mean": 0.09,
+    "ci": 0.014,
+    "n": 440
+   },
+   "diffVsStatic": {
+    "mean": 0.075,
+    "ci": 0.01,
+    "n": 440,
+    "pctImproved": 0.58,
+    "pctWorse": 0.12,
+    "d": 0.673
+   },
+   "firstAttempt": 0.228,
+   "independent": 0.423,
+   "turnsPerTask": 5.174,
+   "gainPer10Turns": 0.022,
+   "hintsPerTask": 0.304,
+   "skipRate": 0.1,
+   "gapMislabel": 0.179,
+   "gapRecall": 0.84,
+   "gapPrecision": 0.594,
+   "diagAcc": 0.635,
+   "diagAccAll": 0.516,
+   "uncertainRate": 0.188,
+   "loadAuc": 0.96,
+   "loadStruggle": 0.462,
+   "loadCalm": 0.15,
+   "falseAdapt": 0,
+   "falseAdaptSlow": 0,
+   "oscillation": 1.517,
+   "hiddenRecovered": 0.132,
+   "rho": 0.588,
+   "recoveryRate": 0.274
+  }
+ },
+ "confusion": {
+  "RETRIEVAL": {
+   "OVERLOAD": 446,
+   "RETRIEVAL": 324,
+   "KNOWLEDGE": 132,
+   "UNCERTAIN": 126,
+   "EXPRESSION": 11,
+   "L1_TRANSFER": 12
+  },
+  "KNOWLEDGE": {
+   "UNCERTAIN": 621,
+   "RETRIEVAL": 405,
+   "KNOWLEDGE": 896,
+   "L1_TRANSFER": 346,
+   "EXPRESSION": 38,
+   "OVERLOAD": 60
+  },
+  "L1_TRANSFER": {
+   "KNOWLEDGE": 109,
+   "L1_TRANSFER": 666,
+   "UNCERTAIN": 298,
+   "RETRIEVAL": 456,
+   "EXPRESSION": 66,
+   "OVERLOAD": 13
+  },
+  "MISUNDERSTANDING": {
+   "MISUNDERSTANDING": 542,
+   "UNCERTAIN": 393,
+   "KNOWLEDGE": 85,
+   "RETRIEVAL": 69,
+   "OVERLOAD": 4,
+   "EXPRESSION": 3
+  },
+  "EXPRESSION": {
+   "EXPRESSION": 807,
+   "OVERLOAD": 53,
+   "UNCERTAIN": 115,
+   "RETRIEVAL": 164,
+   "L1_TRANSFER": 7,
+   "KNOWLEDGE": 259
+  },
+  "OVERLOAD": {
+   "OVERLOAD": 369,
+   "RETRIEVAL": 151,
+   "UNCERTAIN": 116,
+   "KNOWLEDGE": 107,
+   "L1_TRANSFER": 4,
+   "EXPRESSION": 4
+  }
+ },
+ "rules": [
+  {
+   "rule": "R3-STEP-DOWN",
+   "text": "Succeeded with support → withdraw one layer of support",
+   "n": 4122,
+   "nextN": 4035,
+   "nextOk": 1506,
+   "struggleBefore": 0,
+   "nextSuccess": 0.373
+  },
+  {
+   "rule": "R9-KEYWORD",
+   "text": "Retrieval gap, recognition already passed → guided English + keyword cue",
+   "n": 1486,
+   "nextN": 1443,
+   "nextOk": 353,
+   "struggleBefore": 0,
+   "nextSuccess": 0.245
+  },
+  {
+   "rule": "R14-UNCERTAIN",
+   "text": "Diagnosis uncertain → probe with recognition (most informative next step)",
+   "n": 1300,
+   "nextN": 1300,
+   "nextOk": 933,
+   "struggleBefore": 0,
+   "nextSuccess": 0.718
+  },
+  {
+   "rule": "R16-CAP",
+   "text": "Attempt cap reached → model answer, revisit later",
+   "n": 1276,
+   "nextN": 0,
+   "nextOk": 0,
+   "struggleBefore": 0,
+   "nextSuccess": null
+  },
+  {
+   "rule": "R12-TEACH",
+   "text": "Knowledge gap confirmed → explicit bilingual teaching",
+   "n": 1218,
+   "nextN": 1198,
+   "nextOk": 401,
+   "struggleBefore": 0,
+   "nextSuccess": 0.335
+  },
+  {
+   "rule": "R2-RECOVERED",
+   "text": "Correct independent English after scaffolding → recovery confirmed",
+   "n": 1044,
+   "nextN": 0,
+   "nextOk": 0,
+   "struggleBefore": 0,
+   "nextSuccess": null
+  },
+  {
+   "rule": "R17-HINT",
+   "text": "Learner asked for a hint → next minimal hint",
+   "n": 959,
+   "nextN": 904,
+   "nextOk": 339,
+   "struggleBefore": 0,
+   "nextSuccess": 0.375
+  },
+  {
+   "rule": "R4-HOLD",
+   "text": "One calm, fast mistake → targeted feedback, keep the mode (hysteresis)",
+   "n": 927,
+   "nextN": 899,
+   "nextOk": 191,
+   "struggleBefore": 0,
+   "nextSuccess": 0.212
+  },
+  {
+   "rule": "R1-INDEPENDENT",
+   "text": "Correct English with no support → move on",
+   "n": 851,
+   "nextN": 0,
+   "nextOk": 0,
+   "struggleBefore": 0,
+   "nextSuccess": null
+  },
+  {
+   "rule": "R10-CONTRAST",
+   "text": "Tamil-structure transfer → bilingual contrastive explanation",
+   "n": 791,
+   "nextN": 775,
+   "nextOk": 315,
+   "struggleBefore": 0,
+   "nextSuccess": 0.406
+  },
+  {
+   "rule": "R6-BRIDGE",
+   "text": "Expression gap with located missing words → word bank + guided English",
+   "n": 776,
+   "nextN": 753,
+   "nextOk": 416,
+   "struggleBefore": 0,
+   "nextSuccess": 0.552
+  },
+  {
+   "rule": "R13-SIMPLIFY",
+   "text": "Overload → simplify the interaction (rephrase + sentence starter)",
+   "n": 673,
+   "nextN": 665,
+   "nextOk": 240,
+   "struggleBefore": 0,
+   "nextSuccess": 0.361
+  },
+  {
+   "rule": "R5-CLARIFY",
+   "text": "Misunderstood the question → ask it in Tamil, answer stays English",
+   "n": 524,
+   "nextN": 512,
+   "nextOk": 453,
+   "struggleBefore": 0,
+   "nextSuccess": 0.885
+  },
+  {
+   "rule": "R8-PROBE",
+   "text": "Retrieval hypothesis → test with recognition (knowledge without production pressure)",
+   "n": 367,
+   "nextN": 367,
+   "nextOk": 324,
+   "struggleBefore": 0,
+   "nextSuccess": 0.883
+  },
+  {
+   "rule": "R18-SKIP",
+   "text": "Learner skipped → log abandonment, move on",
+   "n": 349,
+   "nextN": 0,
+   "nextOk": 0,
+   "struggleBefore": 0,
+   "nextSuccess": null
+  },
+  {
+   "rule": "R11-CONFIRM",
+   "text": "Knowledge-gap hypothesis untested → recognition check before teaching",
+   "n": 250,
+   "nextN": 250,
+   "nextOk": 155,
+   "struggleBefore": 0,
+   "nextSuccess": 0.62
+  },
+  {
+   "rule": "R7-INVITE-L1",
+   "text": "Expression gap, words not located → invite code-switching to find the gap",
+   "n": 180,
+   "nextN": 178,
+   "nextOk": 148,
+   "struggleBefore": 0,
+   "nextSuccess": 0.831
+  },
+  {
+   "rule": "R15-ESCALATE",
+   "text": "No specific rule fits → one rung more support",
+   "n": 112,
+   "nextN": 112,
+   "nextOk": 74,
+   "struggleBefore": 0,
+   "nextSuccess": 0.661
+  }
+ ],
+ "archetypes": {
+  "fluent": {
+   "label": "Fluent",
+   "byCond": {
+    "static": {
+     "gain": 0.031,
+     "post": 0.741,
+     "pre": 0.709,
+     "independent": 0.684,
+     "gapMislabel": 0.285,
+     "turns": 1
+    },
+    "staticRetry": {
+     "gain": 0.048,
+     "post": 0.758,
+     "pre": 0.709,
+     "independent": 0.881,
+     "gapMislabel": 0.289,
+     "turns": 1.384
+    },
+    "adaptive": {
+     "gain": 0.072,
+     "post": 0.781,
+     "pre": 0.709,
+     "independent": 0.953,
+     "gapMislabel": 0.043,
+     "turns": 1.903
+    },
+    "noHold": {
+     "gain": 0.078,
+     "post": 0.788,
+     "pre": 0.709,
+     "independent": 0.95,
+     "gapMislabel": 0.059,
+     "turns": 2.063
+    },
+    "noProbe": {
+     "gain": 0.075,
+     "post": 0.784,
+     "pre": 0.709,
+     "independent": 0.953,
+     "gapMislabel": 0.03,
+     "turns": 1.9
+    },
+    "englishOnly": {
+     "gain": 0.066,
+     "post": 0.775,
+     "pre": 0.709,
+     "independent": 0.928,
+     "gapMislabel": 0.043,
+     "turns": 2.031
+    },
+    "ladder": {
+     "gain": 0.063,
+     "post": 0.772,
+     "pre": 0.709,
+     "independent": 0.906,
+     "gapMislabel": 0.052,
+     "turns": 2.069
+    }
+   },
+   "n": 40
+  },
+  "slowFluent": {
+   "label": "Slow but fluent",
+   "byCond": {
+    "static": {
+     "gain": 0.036,
+     "post": 0.641,
+     "pre": 0.605,
+     "independent": 0.606,
+     "gapMislabel": 0.34,
+     "turns": 1
+    },
+    "staticRetry": {
+     "gain": 0.061,
+     "post": 0.666,
+     "pre": 0.605,
+     "independent": 0.806,
+     "gapMislabel": 0.32,
+     "turns": 1.5
+    },
+    "adaptive": {
+     "gain": 0.12,
+     "post": 0.725,
+     "pre": 0.605,
+     "independent": 0.906,
+     "gapMislabel": 0.054,
+     "turns": 2.406
+    },
+    "noHold": {
+     "gain": 0.131,
+     "post": 0.736,
+     "pre": 0.605,
+     "independent": 0.875,
+     "gapMislabel": 0.054,
+     "turns": 2.553
+    },
+    "noProbe": {
+     "gain": 0.139,
+     "post": 0.744,
+     "pre": 0.605,
+     "independent": 0.928,
+     "gapMislabel": 0.031,
+     "turns": 2.341
+    },
+    "englishOnly": {
+     "gain": 0.123,
+     "post": 0.728,
+     "pre": 0.605,
+     "independent": 0.894,
+     "gapMislabel": 0.058,
+     "turns": 2.488
+    },
+    "ladder": {
+     "gain": 0.102,
+     "post": 0.706,
+     "pre": 0.605,
+     "independent": 0.872,
+     "gapMislabel": 0.071,
+     "turns": 2.619
+    }
+   },
+   "n": 40
+  },
+  "silentKnower": {
+   "label": "Knows it, freezes",
+   "byCond": {
+    "static": {
+     "gain": -0.019,
+     "post": 0.164,
+     "pre": 0.183,
+     "independent": 0.144,
+     "gapMislabel": 0.847,
+     "turns": 1
+    },
+    "staticRetry": {
+     "gain": 0.005,
+     "post": 0.188,
+     "pre": 0.183,
+     "independent": 0.328,
+     "gapMislabel": 0.858,
+     "turns": 2.3
+    },
+    "adaptive": {
+     "gain": 0.105,
+     "post": 0.288,
+     "pre": 0.183,
+     "independent": 0.391,
+     "gapMislabel": 0.089,
+     "turns": 5.866
+    },
+    "noHold": {
+     "gain": 0.12,
+     "post": 0.303,
+     "pre": 0.183,
+     "independent": 0.35,
+     "gapMislabel": 0.093,
+     "turns": 6.066
+    },
+    "noProbe": {
+     "gain": 0.123,
+     "post": 0.306,
+     "pre": 0.183,
+     "independent": 0.413,
+     "gapMislabel": 0.053,
+     "turns": 5.775
+    },
+    "englishOnly": {
+     "gain": 0.125,
+     "post": 0.308,
+     "pre": 0.183,
+     "independent": 0.4,
+     "gapMislabel": 0.125,
+     "turns": 5.9
+    },
+    "ladder": {
+     "gain": 0.089,
+     "post": 0.272,
+     "pre": 0.183,
+     "independent": 0.372,
+     "gapMislabel": 0.185,
+     "turns": 6.084
+    }
+   },
+   "n": 40
+  },
+  "lexicalGap": {
+   "label": "Missing English words",
+   "byCond": {
+    "static": {
+     "gain": 0.041,
+     "post": 0.139,
+     "pre": 0.098,
+     "independent": 0.066,
+     "gapMislabel": 0.931,
+     "turns": 1
+    },
+    "staticRetry": {
+     "gain": 0.055,
+     "post": 0.153,
+     "pre": 0.098,
+     "independent": 0.175,
+     "gapMislabel": 0.902,
+     "turns": 2.628
+    },
+    "adaptive": {
+     "gain": 0.266,
+     "post": 0.364,
+     "pre": 0.098,
+     "independent": 0.591,
+     "gapMislabel": 0.105,
+     "turns": 5.438
+    },
+    "noHold": {
+     "gain": 0.322,
+     "post": 0.42,
+     "pre": 0.098,
+     "independent": 0.553,
+     "gapMislabel": 0.083,
+     "turns": 5.506
+    },
+    "noProbe": {
+     "gain": 0.308,
+     "post": 0.406,
+     "pre": 0.098,
+     "independent": 0.606,
+     "gapMislabel": 0.076,
+     "turns": 5.156
+    },
+    "englishOnly": {
+     "gain": 0.313,
+     "post": 0.411,
+     "pre": 0.098,
+     "independent": 0.431,
+     "gapMislabel": 0.138,
+     "turns": 6.072
+    },
+    "ladder": {
+     "gain": 0.133,
+     "post": 0.231,
+     "pre": 0.098,
+     "independent": 0.225,
+     "gapMislabel": 0.185,
+     "turns": 6.559
+    }
+   },
+   "n": 40
+  },
+  "transferHeavy": {
+   "label": "Tamil-structure transfer",
+   "byCond": {
+    "static": {
+     "gain": 0.07,
+     "post": 0.172,
+     "pre": 0.102,
+     "independent": 0.116,
+     "gapMislabel": 0.873,
+     "turns": 1
+    },
+    "staticRetry": {
+     "gain": 0.07,
+     "post": 0.172,
+     "pre": 0.102,
+     "independent": 0.269,
+     "gapMislabel": 0.861,
+     "turns": 2.344
+    },
+    "adaptive": {
+     "gain": 0.281,
+     "post": 0.383,
+     "pre": 0.102,
+     "independent": 0.463,
+     "gapMislabel": 0.127,
+     "turns": 5.719
+    },
+    "noHold": {
+     "gain": 0.298,
+     "post": 0.4,
+     "pre": 0.102,
+     "independent": 0.45,
+     "gapMislabel": 0.119,
+     "turns": 5.653
+    },
+    "noProbe": {
+     "gain": 0.327,
+     "post": 0.428,
+     "pre": 0.102,
+     "independent": 0.616,
+     "gapMislabel": 0.095,
+     "turns": 5.153
+    },
+    "englishOnly": {
+     "gain": 0.227,
+     "post": 0.328,
+     "pre": 0.102,
+     "independent": 0.428,
+     "gapMislabel": 0.143,
+     "turns": 5.759
+    },
+    "ladder": {
+     "gain": 0.166,
+     "post": 0.267,
+     "pre": 0.102,
+     "independent": 0.359,
+     "gapMislabel": 0.198,
+     "turns": 6.003
+    }
+   },
+   "n": 40
+  },
+  "beginner": {
+   "label": "Genuine beginner",
+   "byCond": {
+    "static": {
+     "gain": 0,
+     "post": 0.056,
+     "pre": 0.056,
+     "independent": 0.063,
+     "gapMislabel": 0.899,
+     "turns": 1
+    },
+    "staticRetry": {
+     "gain": -0.003,
+     "post": 0.053,
+     "pre": 0.056,
+     "independent": 0.106,
+     "gapMislabel": 0.937,
+     "turns": 2.613
+    },
+    "adaptive": {
+     "gain": 0.173,
+     "post": 0.23,
+     "pre": 0.056,
+     "independent": 0.253,
+     "gapMislabel": 0.114,
+     "turns": 6.659
+    },
+    "noHold": {
+     "gain": 0.172,
+     "post": 0.228,
+     "pre": 0.056,
+     "independent": 0.228,
+     "gapMislabel": 0.152,
+     "turns": 6.703
+    },
+    "noProbe": {
+     "gain": 0.175,
+     "post": 0.231,
+     "pre": 0.056,
+     "independent": 0.338,
+     "gapMislabel": 0.114,
+     "turns": 5.966
+    },
+    "englishOnly": {
+     "gain": 0.15,
+     "post": 0.206,
+     "pre": 0.056,
+     "independent": 0.238,
+     "gapMislabel": 0.152,
+     "turns": 6.659
+    },
+    "ladder": {
+     "gain": 0.092,
+     "post": 0.148,
+     "pre": 0.056,
+     "independent": 0.138,
+     "gapMislabel": 0.241,
+     "turns": 6.803
+    }
+   },
+   "n": 40
+  },
+  "anxious": {
+   "label": "Anxious / overloaded",
+   "byCond": {
+    "static": {
+     "gain": -0.012,
+     "post": 0.142,
+     "pre": 0.155,
+     "independent": 0.131,
+     "gapMislabel": 0.843,
+     "turns": 1
+    },
+    "staticRetry": {
+     "gain": 0,
+     "post": 0.155,
+     "pre": 0.155,
+     "independent": 0.316,
+     "gapMislabel": 0.847,
+     "turns": 2.409
+    },
+    "adaptive": {
+     "gain": 0.116,
+     "post": 0.27,
+     "pre": 0.155,
+     "independent": 0.359,
+     "gapMislabel": 0.122,
+     "turns": 5.869
+    },
+    "noHold": {
+     "gain": 0.116,
+     "post": 0.27,
+     "pre": 0.155,
+     "independent": 0.356,
+     "gapMislabel": 0.102,
+     "turns": 6.169
+    },
+    "noProbe": {
+     "gain": 0.142,
+     "post": 0.297,
+     "pre": 0.155,
+     "independent": 0.444,
+     "gapMislabel": 0.063,
+     "turns": 5.763
+    },
+    "englishOnly": {
+     "gain": 0.117,
+     "post": 0.272,
+     "pre": 0.155,
+     "independent": 0.347,
+     "gapMislabel": 0.125,
+     "turns": 6.294
+    },
+    "ladder": {
+     "gain": 0.078,
+     "post": 0.233,
+     "pre": 0.155,
+     "independent": 0.281,
+     "gapMislabel": 0.176,
+     "turns": 6.409
+    }
+   },
+   "n": 40
+  },
+  "misreader": {
+   "label": "Misreads questions",
+   "byCond": {
+    "static": {
+     "gain": -0.02,
+     "post": 0.148,
+     "pre": 0.169,
+     "independent": 0.119,
+     "gapMislabel": 0.843,
+     "turns": 1
+    },
+    "staticRetry": {
+     "gain": 0,
+     "post": 0.169,
+     "pre": 0.169,
+     "independent": 0.291,
+     "gapMislabel": 0.834,
+     "turns": 2.456
+    },
+    "adaptive": {
+     "gain": 0.131,
+     "post": 0.3,
+     "pre": 0.169,
+     "independent": 0.528,
+     "gapMislabel": 0.105,
+     "turns": 5.509
+    },
+    "noHold": {
+     "gain": 0.117,
+     "post": 0.286,
+     "pre": 0.169,
+     "independent": 0.434,
+     "gapMislabel": 0.109,
+     "turns": 5.663
+    },
+    "noProbe": {
+     "gain": 0.109,
+     "post": 0.278,
+     "pre": 0.169,
+     "independent": 0.584,
+     "gapMislabel": 0.07,
+     "turns": 5.138
+    },
+    "englishOnly": {
+     "gain": 0.088,
+     "post": 0.256,
+     "pre": 0.169,
+     "independent": 0.384,
+     "gapMislabel": 0.048,
+     "turns": 5.997
+    },
+    "ladder": {
+     "gain": 0.059,
+     "post": 0.228,
+     "pre": 0.169,
+     "independent": 0.375,
+     "gapMislabel": 0.109,
+     "turns": 5.831
+    }
+   },
+   "n": 40
+  },
+  "careless": {
+   "label": "Fast and careless",
+   "byCond": {
+    "static": {
+     "gain": 0.023,
+     "post": 0.375,
+     "pre": 0.352,
+     "independent": 0.322,
+     "gapMislabel": 0.649,
+     "turns": 1
+    },
+    "staticRetry": {
+     "gain": 0.055,
+     "post": 0.406,
+     "pre": 0.352,
+     "independent": 0.656,
+     "gapMislabel": 0.617,
+     "turns": 2.016
+    },
+    "adaptive": {
+     "gain": 0.167,
+     "post": 0.519,
+     "pre": 0.352,
+     "independent": 0.772,
+     "gapMislabel": 0.113,
+     "turns": 3.609
+    },
+    "noHold": {
+     "gain": 0.183,
+     "post": 0.534,
+     "pre": 0.352,
+     "independent": 0.713,
+     "gapMislabel": 0.103,
+     "turns": 4.147
+    },
+    "noProbe": {
+     "gain": 0.166,
+     "post": 0.517,
+     "pre": 0.352,
+     "independent": 0.772,
+     "gapMislabel": 0.113,
+     "turns": 3.472
+    },
+    "englishOnly": {
+     "gain": 0.155,
+     "post": 0.506,
+     "pre": 0.352,
+     "independent": 0.75,
+     "gapMislabel": 0.113,
+     "turns": 3.734
+    },
+    "ladder": {
+     "gain": 0.102,
+     "post": 0.453,
+     "pre": 0.352,
+     "independent": 0.628,
+     "gapMislabel": 0.181,
+     "turns": 4.247
+    }
+   },
+   "n": 40
+  },
+  "erratic": {
+   "label": "Erratic / inconsistent",
+   "byCond": {
+    "static": {
+     "gain": -0.019,
+     "post": 0.083,
+     "pre": 0.102,
+     "independent": 0.034,
+     "gapMislabel": 0.956,
+     "turns": 1
+    },
+    "staticRetry": {
+     "gain": 0.002,
+     "post": 0.103,
+     "pre": 0.102,
+     "independent": 0.091,
+     "gapMislabel": 0.932,
+     "turns": 1.641
+    },
+    "adaptive": {
+     "gain": 0.064,
+     "post": 0.166,
+     "pre": 0.102,
+     "independent": 0.194,
+     "gapMislabel": 0.544,
+     "turns": 4.447
+    },
+    "noHold": {
+     "gain": 0.063,
+     "post": 0.164,
+     "pre": 0.102,
+     "independent": 0.184,
+     "gapMislabel": 0.534,
+     "turns": 4.391
+    },
+    "noProbe": {
+     "gain": 0.067,
+     "post": 0.169,
+     "pre": 0.102,
+     "independent": 0.216,
+     "gapMislabel": 0.519,
+     "turns": 4.097
+    },
+    "englishOnly": {
+     "gain": 0.055,
+     "post": 0.156,
+     "pre": 0.102,
+     "independent": 0.141,
+     "gapMislabel": 0.524,
+     "turns": 4.669
+    },
+    "ladder": {
+     "gain": -0.002,
+     "post": 0.1,
+     "pre": 0.102,
+     "independent": 0.128,
+     "gapMislabel": 0.553,
+     "turns": 4.475
+    }
+   },
+   "n": 40
+  },
+  "mixed": {
+   "label": "Mixed per concept",
+   "byCond": {
+    "static": {
+     "gain": 0.03,
+     "post": 0.227,
+     "pre": 0.197,
+     "independent": 0.169,
+     "gapMislabel": 0.772,
+     "turns": 1
+    },
+    "staticRetry": {
+     "gain": 0.038,
+     "post": 0.234,
+     "pre": 0.197,
+     "independent": 0.347,
+     "gapMislabel": 0.746,
+     "turns": 2.3
+    },
+    "adaptive": {
+     "gain": 0.18,
+     "post": 0.377,
+     "pre": 0.197,
+     "independent": 0.513,
+     "gapMislabel": 0.089,
+     "turns": 5.25
+    },
+    "noHold": {
+     "gain": 0.167,
+     "post": 0.364,
+     "pre": 0.197,
+     "independent": 0.494,
+     "gapMislabel": 0.098,
+     "turns": 5.331
+    },
+    "noProbe": {
+     "gain": 0.219,
+     "post": 0.416,
+     "pre": 0.197,
+     "independent": 0.581,
+     "gapMislabel": 0.04,
+     "turns": 4.947
+    },
+    "englishOnly": {
+     "gain": 0.198,
+     "post": 0.395,
+     "pre": 0.197,
+     "independent": 0.494,
+     "gapMislabel": 0.094,
+     "turns": 5.297
+    },
+    "ladder": {
+     "gain": 0.106,
+     "post": 0.303,
+     "pre": 0.197,
+     "independent": 0.372,
+     "gapMislabel": 0.161,
+     "turns": 5.809
+    }
+   },
+   "n": 40
+  }
+ },
+ "concepts": {
+  "past_tense": {
+   "label": "Past tense",
+   "byCond": {
+    "static": {
+     "pre": 0.24,
+     "post": 0.266
+    },
+    "staticRetry": {
+     "pre": 0.24,
+     "post": 0.286
+    },
+    "adaptive": {
+     "pre": 0.24,
+     "post": 0.423
+    },
+    "noHold": {
+     "pre": 0.24,
+     "post": 0.418
+    },
+    "noProbe": {
+     "pre": 0.24,
+     "post": 0.422
+    },
+    "englishOnly": {
+     "pre": 0.24,
+     "post": 0.402
+    },
+    "ladder": {
+     "pre": 0.24,
+     "post": 0.351
+    }
+   }
+  },
+  "articles": {
+   "label": "Articles (a / an)",
+   "byCond": {
+    "static": {
+     "pre": 0.233,
+     "post": 0.258
+    },
+    "staticRetry": {
+     "pre": 0.233,
+     "post": 0.253
+    },
+    "adaptive": {
+     "pre": 0.233,
+     "post": 0.39
+    },
+    "noHold": {
+     "pre": 0.233,
+     "post": 0.405
+    },
+    "noProbe": {
+     "pre": 0.233,
+     "post": 0.403
+    },
+    "englishOnly": {
+     "pre": 0.233,
+     "post": 0.392
+    },
+    "ladder": {
+     "pre": 0.233,
+     "post": 0.332
+    }
+   }
+  },
+  "prepositions": {
+   "label": "Prepositions",
+   "byCond": {
+    "static": {
+     "pre": 0.272,
+     "post": 0.28
+    },
+    "staticRetry": {
+     "pre": 0.272,
+     "post": 0.295
+    },
+    "adaptive": {
+     "pre": 0.272,
+     "post": 0.403
+    },
+    "noHold": {
+     "pre": 0.272,
+     "post": 0.411
+    },
+    "noProbe": {
+     "pre": 0.272,
+     "post": 0.434
+    },
+    "englishOnly": {
+     "pre": 0.272,
+     "post": 0.401
+    },
+    "ladder": {
+     "pre": 0.272,
+     "post": 0.317
+    }
+   }
+  },
+  "vocabulary_advice": {
+   "label": "Giving advice",
+   "byCond": {
+    "static": {
+     "pre": 0.252,
+     "post": 0.273
+    },
+    "staticRetry": {
+     "pre": 0.252,
+     "post": 0.284
+    },
+    "adaptive": {
+     "pre": 0.252,
+     "post": 0.406
+    },
+    "noHold": {
+     "pre": 0.252,
+     "post": 0.434
+    },
+    "noProbe": {
+     "pre": 0.252,
+     "post": 0.408
+    },
+    "englishOnly": {
+     "pre": 0.252,
+     "post": 0.376
+    },
+    "ladder": {
+     "pre": 0.252,
+     "post": 0.351
+    }
+   }
+  },
+  "questions": {
+   "label": "Questions (do-support)",
+   "byCond": {
+    "static": {
+     "pre": 0.226,
+     "post": 0.243
+    },
+    "staticRetry": {
+     "pre": 0.226,
+     "post": 0.28
+    },
+    "adaptive": {
+     "pre": 0.226,
+     "post": 0.37
+    },
+    "noHold": {
+     "pre": 0.226,
+     "post": 0.385
+    },
+    "noProbe": {
+     "pre": 0.226,
+     "post": 0.384
+    },
+    "englishOnly": {
+     "pre": 0.226,
+     "post": 0.385
+    },
+    "ladder": {
+     "pre": 0.226,
+     "post": 0.32
+    }
+   }
+  },
+  "third_person_s": {
+   "label": "He / she + verb-s",
+   "byCond": {
+    "static": {
+     "pre": 0.273,
+     "post": 0.27
+    },
+    "staticRetry": {
+     "pre": 0.273,
+     "post": 0.283
+    },
+    "adaptive": {
+     "pre": 0.273,
+     "post": 0.393
+    },
+    "noHold": {
+     "pre": 0.273,
+     "post": 0.398
+    },
+    "noProbe": {
+     "pre": 0.273,
+     "post": 0.408
+    },
+    "englishOnly": {
+     "pre": 0.273,
+     "post": 0.408
+    },
+    "ladder": {
+     "pre": 0.273,
+     "post": 0.343
+    }
+   }
+  },
+  "present_continuous": {
+   "label": "Present continuous",
+   "byCond": {
+    "static": {
+     "pre": 0.245,
+     "post": 0.273
+    },
+    "staticRetry": {
+     "pre": 0.245,
+     "post": 0.278
+    },
+    "adaptive": {
+     "pre": 0.245,
+     "post": 0.43
+    },
+    "noHold": {
+     "pre": 0.245,
+     "post": 0.415
+    },
+    "noProbe": {
+     "pre": 0.245,
+     "post": 0.46
+    },
+    "englishOnly": {
+     "pre": 0.245,
+     "post": 0.393
+    },
+    "ladder": {
+     "pre": 0.245,
+     "post": 0.348
+    }
+   }
+  },
+  "comparatives": {
+   "label": "Comparatives",
+   "byCond": {
+    "static": {
+     "pre": 0.242,
+     "post": 0.238
+    },
+    "staticRetry": {
+     "pre": 0.242,
+     "post": 0.263
+    },
+    "adaptive": {
+     "pre": 0.242,
+     "post": 0.386
+    },
+    "noHold": {
+     "pre": 0.242,
+     "post": 0.402
+    },
+    "noProbe": {
+     "pre": 0.242,
+     "post": 0.409
+    },
+    "englishOnly": {
+     "pre": 0.242,
+     "post": 0.4
+    },
+    "ladder": {
+     "pre": 0.242,
+     "post": 0.339
+    }
+   }
+  }
+ },
+ "sensitivity": {
+  "0.5": {
+   "static": {
+    "gain": {
+     "mean": 0.007,
+     "ci": 0.016,
+     "n": 220
+    },
+    "diffVsStatic": {
+     "mean": 0,
+     "ci": 0,
+     "n": 220,
+     "pctImproved": 0,
+     "pctWorse": 0,
+     "d": null
+    }
+   },
+   "staticRetry": {
+    "gain": {
+     "mean": 0.012,
+     "ci": 0.015,
+     "n": 220
+    },
+    "diffVsStatic": {
+     "mean": 0.004,
+     "ci": 0.008,
+     "n": 220,
+     "pctImproved": 0.173,
+     "pctWorse": 0.123,
+     "d": 0.067
+    }
+   },
+   "adaptive": {
+    "gain": {
+     "mean": 0.078,
+     "ci": 0.018,
+     "n": 220
+    },
+    "diffVsStatic": {
+     "mean": 0.071,
+     "ci": 0.014,
+     "n": 220,
+     "pctImproved": 0.573,
+     "pctWorse": 0.136,
+     "d": 0.667
+    }
+   }
+  },
+  "1.5": {
+   "static": {
+    "gain": {
+     "mean": 0.046,
+     "ci": 0.017,
+     "n": 220
+    },
+    "diffVsStatic": {
+     "mean": 0,
+     "ci": 0,
+     "n": 220,
+     "pctImproved": 0,
+     "pctWorse": 0,
+     "d": null
+    }
+   },
+   "staticRetry": {
+    "gain": {
+     "mean": 0.059,
+     "ci": 0.017,
+     "n": 220
+    },
+    "diffVsStatic": {
+     "mean": 0.014,
+     "ci": 0.013,
+     "n": 220,
+     "pctImproved": 0.318,
+     "pctWorse": 0.277,
+     "d": 0.134
+    }
+   },
+   "adaptive": {
+    "gain": {
+     "mean": 0.211,
+     "ci": 0.021,
+     "n": 220
+    },
+    "diffVsStatic": {
+     "mean": 0.166,
+     "ci": 0.02,
+     "n": 220,
+     "pctImproved": 0.786,
+     "pctWorse": 0.05,
+     "d": 1.122
+    }
+   }
+  }
+ }
+}

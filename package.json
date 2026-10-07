@@ -1,0 +1,14 @@
+{
+  "name": "kural-tutor",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/engine.test.mjs",
+    "sim": "node sim/run.mjs --per 40 --seed 99"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.132.0"
+  }
+}
