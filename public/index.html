@@ -25,6 +25,8 @@
       <button role="tab" data-view="counterfactual" aria-selected="false">Static vs adaptive</button>
       <button role="tab" data-view="sessions" aria-selected="false">Sessions</button>
       <button role="tab" data-view="eval" aria-selected="false">Evaluation</button>
+      <button role="tab" data-view="report" aria-selected="false">Report</button>
+      <button role="tab" data-view="monitor" aria-selected="false">Monitor <span class="live-dot" aria-hidden="true"></span></button>
     </nav>
     <span id="llmBadge" class="badge" title=""></span>
   </header>
@@ -65,6 +67,7 @@
         </div>
         <aside id="modelPanel" class="model-panel" aria-label="Model reasoning"></aside>
       </div>
+      <p class="small faint" style="margin-top:10px">Kural records anonymous usage metrics (timings, modes, outcomes; never your name or what you type) to monitor how well the tutor works.</p>
     </section>
 
     <section id="view-dashboard" class="view"></section>
@@ -72,6 +75,8 @@
     <section id="view-counterfactual" class="view"></section>
     <section id="view-sessions" class="view"></section>
     <section id="view-eval" class="view"></section>
+    <section id="view-report" class="view"></section>
+    <section id="view-monitor" class="view"></section>
   </main>
 
   <div id="tooltip" class="tooltip" role="tooltip" hidden></div>

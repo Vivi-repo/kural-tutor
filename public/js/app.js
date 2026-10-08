@@ -7,6 +7,9 @@ import { renderDashboard, renderDecisions, renderCounterfactual, renderSessions 
 import { installTooltip, modeTag } from './charts.js';
 import { connectLLM } from './llm.js';
 import { renderEval } from './eval.js';
+import { renderReport } from './report.js';
+import { renderMonitor, stopMonitor } from './monitor.js';
+import { track } from './telemetry.js';
 
 const $ = id => document.getElementById(id);
 const STORE = 'kural.sessions.v1', PREFS = 'kural.prefs.v1';
@@ -43,6 +46,7 @@ const tel = new Telemetry();
 const prefs = store.get(PREFS, { showModel: true });
 
 function persist() {
+  track(session, { llm: !!llm });
   const list = store.get(STORE, []).filter(s => s.id !== session.id);
   list.push(session.toJSON());
   store.set(STORE, list.slice(-40));
@@ -80,10 +84,13 @@ function renderView() {
   if (view === 'counterfactual') renderCounterfactual(el, session);
   if (view === 'sessions') renderSessions(el, store.get(STORE, []), session.id);
   if (view === 'eval' && !el.dataset.loaded) { el.dataset.loaded = '1'; renderEval(el); }
+  if (view === 'report' && !el.dataset.loaded) { el.dataset.loaded = '1'; renderReport(el); }
+  if (view === 'monitor') renderMonitor(el);
 }
 function renderAll() { renderLearn(); if (view !== 'learn') renderView(); }
 
 function setView(v) {
+  if (view === 'monitor' && v !== 'monitor') stopMonitor();
   view = v;
   document.querySelectorAll('.tabs button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === v)));
   document.querySelectorAll('.view').forEach(s => s.dataset.active = String(s.id === `view-${v}`));

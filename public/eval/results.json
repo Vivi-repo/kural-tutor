@@ -1,12 +1,12 @@
 {
  "meta": {
-  "generatedAt": "2026-10-07T23:35:08.592Z",
+  "generatedAt": "2026-10-07T23:45:49.583Z",
   "seed": 99,
   "perArchetype": 40,
   "learners": 440,
   "tasks": 8,
   "testItemsPerConcept": 2,
-  "runtimeSec": 8.7,
+  "runtimeSec": 15.681,
   "archetypes": {
    "fluent": "Fluent",
    "slowFluent": "Slow but fluent",
@@ -94,7 +94,7 @@
   },
   "bankProblems": [],
   "tuning": {
-   "note": "One diagnosis change was made after inspecting the confusion matrix on a separate tuning seed (7): history-based retrieval evidence is halved when the answer shows a specific error pattern. All numbers on this page come from a fresh held-out seed (99).",
+   "note": "One diagnosis change was made after inspecting the confusion matrix on a separate tuning seed (7): history-based retrieval evidence is halved when the answer shows a specific error pattern. All numbers on this page come from a fresh held-out seed.",
    "tuningSeed": 7,
    "diagAccBefore": 0.501,
    "diagAccAfter": 0.54,

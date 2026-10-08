@@ -158,7 +158,7 @@ export class Session {
 
   _finishTask(outcome) {
     const ts = this.ts, task = this.task;
-    ts.outcome = outcome; ts.endedTurn = this.turns.length;
+    ts.outcome = outcome; ts.endedTurn = this.turns.length; ts.endedAt = Date.now();
     const dom = dominant(ts);
     const firstOk = ts.firstAttempt?.correct && ts.firstAttempt.mode === 'ENGLISH';
     ts.dominant = dom;
