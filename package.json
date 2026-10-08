@@ -6,9 +6,11 @@
   "scripts": {
     "start": "node server.js",
     "test": "node test/engine.test.mjs",
-    "sim": "node sim/run.mjs --per 40 --seed 99"
+    "sim": "node sim/run.mjs --per 40 --seed 99",
+    "stats": "node sim/stats.mjs"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.132.0"
+    "@anthropic-ai/sdk": "^0.132.0",
+    "@vercel/blob": "^2.8.1"
   }
 }

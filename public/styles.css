@@ -255,3 +255,25 @@ table.data tr:last-child td { border-bottom: 0; }
 svg .hit { fill: transparent; cursor: pointer; }
 svg text { fill: var(--ink-3); font-size: 11px; font-family: var(--font); }
 svg .axis-label { fill: var(--ink-2); }
+
+/* ---------- monitor ---------- */
+.live-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--good); margin-left: 4px; vertical-align: 2px; animation: pulse 2s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--good) 55%, transparent); } 70% { box-shadow: 0 0 0 7px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+@media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+.alerts { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.alert { padding: 8px 12px; border-radius: 8px; font-size: 13px; border: 1px solid var(--border); background: var(--surface); margin-bottom: 12px; }
+.alerts .alert { margin-bottom: 0; }
+.alert b { text-transform: capitalize; margin-right: 6px; }
+.alert.critical { border-color: var(--critical); background: color-mix(in srgb, var(--critical) 8%, var(--surface)); }
+.alert.warning { border-color: var(--insight-border); background: var(--insight-bg); }
+.alert.ok { border-color: color-mix(in srgb, var(--good) 50%, var(--border)); }
+
+/* ---------- report ---------- */
+.verdicts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 12px; }
+.verdict { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px; }
+.verdict .vid { font-family: ui-monospace, Consolas, monospace; font-size: 12px; color: var(--ink-3); }
+.verdict .claim { font-weight: 600; }
+.verdict .ev { font-size: 13px; color: var(--ink-2); display: block; }
+.verdict .cav { font-size: 12px; color: var(--ink-3); border-top: 1px solid var(--grid); padding-top: 6px; }
+.prose { max-width: 820px; font-size: 14px; }
+.prose li { margin: 4px 0; }

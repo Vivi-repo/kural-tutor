@@ -54,6 +54,18 @@ Results are shown on the **Evaluation** tab. The setup:
 - **Conditions:** static tutor, static + retries, full adaptive, and four ablations (no hysteresis, no recognition probe, no Tamil channels, ladder without diagnosis).
 - **What's measured vs. assumed:** diagnosis accuracy, false "doesn't know" labels and false adaptations are scored against the simulator's ground truth. Learning gains depend on the modelled effects in `sim/learner.mjs` (`EFFECTS`), and a sensitivity analysis scales them ×0.5 and ×1.5.
 
+## Hypothesis validation
+
+```bash
+npm run stats    # ≈1 min → public/eval/stats.json + REPORT.md
+```
+
+Paired tests per learner (t, Wilcoxon, sign-flip permutation, bootstrap CIs), McNemar for labels, cluster bootstrap for turn-level metrics, Holm correction, 5-seed replication, sensitivity, and power analysis for a real pilot. Results are on the **Report** tab and in [REPORT.md](REPORT.md).
+
+## Live monitoring
+
+The app sends **anonymous** per-session metrics to `/api/track` (timings, modes, outcomes, diagnoses; never names or typed answers). The **Monitor** tab polls `/api/metrics` every 15 s and shows live KPIs against simulation expectations, estimator health (load AUC, load vs self-rating, oscillation), strategy effectiveness, per-concept results and alerts. Storage is a private Vercel Blob store in production (`BLOB_READ_WRITE_TOKEN`) and `data/sessions/` locally.
+
 ## Deploy
 
 ```bash

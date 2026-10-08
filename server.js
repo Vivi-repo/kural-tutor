@@ -7,6 +7,8 @@ import { readFile } from 'node:fs/promises';
 import { extname, join, normalize, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { client, llmStatus, analyze, MODEL } from './lib/analyze.js';
+import { sanitize, saveSession, loadSessions, backend } from './lib/store.js';
+import { aggregate } from './lib/aggregate.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), 'public');
 const PORT = Number(process.env.PORT) || 5173;
@@ -15,7 +17,7 @@ const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; ch
 function readBody(req) {
   return new Promise((resolve, reject) => {
     let data = '';
-    req.on('data', c => { data += c; if (data.length > 20000) req.destroy(); });
+    req.on('data', c => { data += c; if (data.length > 250000) req.destroy(); });
     req.on('end', () => { try { resolve(JSON.parse(data || '{}')); } catch (e) { reject(e); } });
   });
 }
@@ -25,6 +27,15 @@ const server = http.createServer(async (req, res) => {
   const json = (code, obj) => { res.writeHead(code, { 'content-type': 'application/json' }); res.end(JSON.stringify(obj)); };
 
   if (url.pathname === '/api/health') return json(200, { llm: !!client, model: client ? MODEL : null, status: llmStatus });
+  if (url.pathname === '/api/track' && req.method === 'POST') {
+    try { const doc = sanitize(await readBody(req)); if (!doc) return json(400, { error: 'invalid session' }); await saveSession(doc); res.writeHead(204); return res.end(); }
+    catch (e) { return json(500, { error: e.message }); }
+  }
+  if (url.pathname === '/api/metrics') {
+    const demo = ['include', 'exclude', 'only'].includes(url.searchParams.get('demo')) ? url.searchParams.get('demo') : 'exclude';
+    const days = Math.max(0, Math.min(365, Number(url.searchParams.get('days') ?? 30) || 0));
+    return json(200, { backend, ...aggregate(await loadSessions(), { demo, days }) });
+  }
   if (url.pathname === '/api/analyze' && req.method === 'POST') {
     if (!client) return json(503, { error: 'LLM disabled' });
     try {
